@@ -125,11 +125,11 @@ export default class Reporter {
     const content = doc.end({ prettyPrint: true });
     const filename = this.opts.filename;
     try {
-      // Ensure the directory exists
+      // Ensure the directory exists.
       const dirPath = path.dirname(filename);
       fs.mkdirSync(dirPath, { recursive: true });
 
-      // Write the file
+      // Write the file.
       fs.writeFileSync(filename, content);
     } catch (err) {
       console.error(`Failed to generate JUnit file(${filename}): `, err);

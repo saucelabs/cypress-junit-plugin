@@ -9,7 +9,7 @@
 
 ## Prerequisites
 
-Cypress Version: This plugin only supports Cypress version 10 and above. Ensure your project is updated to comply with this requirement.
+Cypress Version: This plugin only supports Cypress version 13 and above. Ensure your project is updated to comply with this requirement.
 
 ## Installation
 

@@ -93,7 +93,6 @@ export interface Property {
  * @property {string} [details] - Optional; provides additional information or the complete error message associated with the failure,
  *                                including stack traces or more specific details about the assertion failure.
  */
-
 export interface failure {
   message: string;
   type: string;
@@ -113,7 +112,6 @@ export interface failure {
  * @property {string} details - Provides comprehensive information about the error, including stack traces or specifics of the exception,
  *                              which can help in diagnosing the problem.
  */
-
 export interface error {
   message: string;
   type: string;

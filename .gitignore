@@ -105,7 +105,9 @@ dist
 .tern-port
 
 # Cypress specific files
-/cypress/
+tests/integration/cypress/screenshots/*
+tests/integration/cypress/videos/*
+
 
 # Exclude build folder.
 /lib

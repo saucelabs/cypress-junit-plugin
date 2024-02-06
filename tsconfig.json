@@ -8,6 +8,7 @@
     "**/*.spec.ts"
   ],
   "compilerOptions": {
+    "esModuleInterop": true,
     "outDir": "lib",
     "declaration": true,
     "declarationMap": true

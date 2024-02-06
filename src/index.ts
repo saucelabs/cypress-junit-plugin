@@ -10,6 +10,7 @@ import Reporter, { TestCase, TestSuite } from './reporter';
 let reporter: Reporter;
 
 const onBeforeRun = function (details: BeforeRunDetails) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`;
 };
 
@@ -17,13 +18,14 @@ const onAfterSpec = async function (
   spec: Spec,
   results: CypressCommandLine.RunResult,
 ) {
-  let testsuite = new TestSuite();
+  const testsuite = new TestSuite();
   let errCount = 0;
   results.tests.forEach((test) => {
-    let testcase = new TestCase(
+    const testcase = new TestCase(
       test.title.join(' '),
       test.title.length ? test.title[test.title.length - 1] : '',
-      msToSec(test.duration),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      msToSec((test as any).duration),
       spec.relative || '',
     );
     if (test.state === 'failed') {
@@ -71,6 +73,7 @@ const onAfterSpec = async function (
   reporter.junitSuite.testsuites?.push(testsuite);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onAfterRun = function (results: any) {
   reporter.junitSuite.tests = results.totalTests;
   reporter.junitSuite.failures = results.totalFailed;

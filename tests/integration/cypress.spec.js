@@ -20,6 +20,7 @@ describe('generate JUnit file', function () {
         shell: true,
         cwd: __dirname,
       });
+    // eslint-disable-next-line no-empty
     } catch (error) {}
   }, 30000);
 

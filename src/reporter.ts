@@ -71,11 +71,12 @@ export default class Reporter {
         '@failures': this.junitSuite.failures,
         '@time': this.junitSuite.time,
         '@errors': this.junitSuite.errors,
-        testsuite: [] as any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        testsuite: [] as any[],
       },
     };
     this.junitSuite.testsuites?.forEach((suite) => {
-      let testsuite = {
+      const testsuite = {
         '@name': suite.name,
         '@tests': suite.tests,
         '@failures': suite.failures,
@@ -83,11 +84,14 @@ export default class Reporter {
         '@time': suite.time,
         '@timestamp': suite.timestamp,
         '@file': suite.file,
-        testcase: [] as any,
-        properties: suite.properties ? ([] as any) : undefined,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        testcase: [] as any[],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        properties: suite.properties ? ({} as any) : undefined,
       };
       if (suite.properties) {
-        let properties = { property: [] as any };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const properties = { property: [] as any[] };
         suite.properties.forEach((p) => {
           properties.property.push({
             '@name': p.name,

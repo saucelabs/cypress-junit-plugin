@@ -3,7 +3,7 @@ require('jest');
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const { XMLParser, XMLBuilder, XMLValidator } = require('fast-xml-parser');
+const { XMLParser } = require('fast-xml-parser');
 
 describe('generate JUnit file', function () {
   const junitFile = path.join(__dirname, 'junit.xml');

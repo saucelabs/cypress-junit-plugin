@@ -62,7 +62,7 @@ export default class Reporter {
     this.opts = opts;
   }
 
-  async toJUnitFile() {
+  toJUnitFile() {
     const obj = {
       testsuites: {
         '@name': this.junitSuite.name,

@@ -101,7 +101,8 @@ const msToSec = (durationMs: number): number => {
  * Error message example: "AssertionError: Timed out retrying after 4000ms".
  *
  * @param {string} err - The error message from which to extract the error type.
- * @returns {string} The extracted error type without the colon. Returns an empty string if the error type cannot be determined.
+ * @returns {string} The extracted error type without the colon and details.
+ *                   Returns an empty string if the error type cannot be determined.
  */
 const parseErrorType = (err: string): string => {
   const items = err.split(' ');

@@ -23,7 +23,7 @@ npm install @saucelabs/cypress-junit-plugin --save-dev
 
 After installation, you need to configure the plugin to work with your Cypress setup.
 
-Edit `cypress.config.js`: Add the plugin to your `cypress.config.js` configuration file.
+`cypress.config.mjs` example:
 
 ```javascript
 import { defineConfig } from 'cypress'
@@ -39,6 +39,21 @@ export default defineConfig({
     }
   },
 })
+```
+
+`cypress.config.cjs` example:
+const { defineConfig } = require('cypress');
+
+```javascript
+module.exports = defineConfig({
+  video: true,
+  e2e: {
+    setupNodeEvents(on, config) {
+      require('@saucelabs/cypress-junit-plugin').default(on, config, { filename: 'path/to/my_junit.xml' });
+      return config;
+    },
+  },
+});
 ```
 
 ## Usage

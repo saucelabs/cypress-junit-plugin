@@ -10,7 +10,7 @@ describe('generate JUnit file', function () {
 
   beforeAll(async function () {
     if (fs.existsSync(junitFile)) {
-      fs.rmSync(junitFile)
+      fs.rmSync(junitFile);
     }
     const cypressRunCommand = 'cypress run &> /dev/null';
 
@@ -20,8 +20,7 @@ describe('generate JUnit file', function () {
         shell: true,
         cwd: __dirname,
       });
-    } catch (error) {
-    }
+    } catch (error) {}
   }, 30000);
 
   test('JUnit report is generated', function () {

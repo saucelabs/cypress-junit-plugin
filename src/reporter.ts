@@ -15,6 +15,8 @@ export class TestSuite implements JUnitTestSuite {
   failures: number;
   errors: number;
   time: number;
+  timestamp: string;
+  file: string;
   testsuites: JUnitTestSuite[] | undefined;
   testCases: JUnitTestCase[];
   properties?: Property[] | undefined;
@@ -25,6 +27,8 @@ export class TestSuite implements JUnitTestSuite {
     this.tests = 0;
     this.failures = 0;
     this.errors = 0;
+    this.timestamp = '';
+    this.file = '';
     this.testCases = [];
   }
 
@@ -37,13 +41,15 @@ export class TestCase implements JUnitTestCase {
   name: string;
   classname: string;
   time: number;
+  file: string;
   failure?: failure | undefined;
   error?: error | undefined;
 
-  constructor(name: string, classname: string, time: number) {
+  constructor(name: string, classname: string, time: number, file: string) {
     this.name = name;
     this.classname = classname;
     this.time = time;
+    this.file = file;
   }
 }
 
@@ -74,13 +80,27 @@ export default class Reporter {
         '@failures': suite.failures,
         '@errors': suite.errors,
         '@time': suite.time,
+        '@timestamp': suite.timestamp,
+        '@file': suite.file,
         testcase: [] as any,
+        properties: suite.properties ? ([] as any) : undefined,
       };
+      if (suite.properties) {
+        let properties = { property: [] as any };
+        suite.properties.forEach((p) => {
+          properties.property.push({
+            '@name': p.name,
+            '@value': p.value,
+          });
+        });
+        testsuite.properties = properties;
+      }
       suite.testCases.forEach((t) => {
         testsuite.testcase.push({
           '@name': t.name,
           '@classname': t.classname,
           '@time': t.time,
+          '@file': t.file,
           failure: t.failure
             ? {
                 '@message': t.failure?.message,

@@ -24,6 +24,7 @@ const onAfterSpec = async function (
       test.title.join(' '),
       test.title.length ? test.title[test.title.length - 1] : '',
       msToSec(test.duration),
+      spec.relative || '',
     );
     if (test.state === 'failed') {
       testcase.failure = {
@@ -42,18 +43,29 @@ const onAfterSpec = async function (
     }
     testsuite.add(testcase);
   });
+
   testsuite.name = spec.name;
   testsuite.tests = results.stats.tests;
   testsuite.failures = results.stats.failures;
   testsuite.errors = errCount;
   testsuite.time = getDuration(results.stats.startedAt, results.stats.endedAt);
+  testsuite.timestamp = results.stats.startedAt;
+  testsuite.file = spec.relative || '';
+
   if (results.screenshots) {
-    testsuite.properties = [];
+    testsuite.properties = testsuite.properties || [];
     results.screenshots.forEach((s) => {
       testsuite.properties?.push({
         name: 'attachment',
         value: s.path,
       });
+    });
+  }
+  if (results.video) {
+    testsuite.properties = testsuite.properties || [];
+    testsuite.properties?.push({
+      name: 'attachment',
+      value: results.video,
     });
   }
   reporter.junitSuite.testsuites?.push(testsuite);

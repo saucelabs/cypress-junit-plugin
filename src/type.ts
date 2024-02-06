@@ -20,6 +20,8 @@ export interface ConfigOption {
  * @property {number} failures - Count of tests that failed.
  * @property {number} errors - Number of tests that encountered errors.
  * @property {number} time - Execution time for the entire test suite, in seconds.
+ * @property {string} timestamp - Date and time of when the test suite was executed (in ISO 8601 format).
+ * @property {string} file - Source code file of this test suite.
  * @property {JUnitTestSuite[]} testsuites - Optional; array of JUnitTestSuite objects, each representing an individual test suite.
  * @property {JUnitTestCase[]} testCases - Array of JUnitTestCase objects, each representing an individual test case.
  * @property {Property[]} [properties] - Optional; array of Property objects for specifying additional metadata related to the test suite.
@@ -30,6 +32,8 @@ export interface JUnitTestSuite {
   failures: number;
   errors: number;
   time: number;
+  timestamp: string;
+  file: string;
   testsuites?: JUnitTestSuite[];
   testCases: JUnitTestCase[];
   properties?: Property[];
@@ -44,6 +48,7 @@ export interface JUnitTestSuite {
  * @property {string} name - The name of the test case, typically describing the test being performed.
  * @property {string} classname - The name of the class or group to which this test case belongs.
  * @property {number} time - The duration of the test case execution, in seconds.
+ * @property {string} file - Source code file of this test suite.
  * @property {failure} [failure] - Optional; details of the test failure, if the test did not pass successfully.
  *                                This includes information like the failure message and type.
  * @property {error} [error] - Optional; details of any error encountered during the test case execution,
@@ -54,6 +59,7 @@ export interface JUnitTestCase {
   name: string;
   classname: string;
   time: number;
+  file: string;
   failure?: failure;
   error?: error;
   properties?: Property[];

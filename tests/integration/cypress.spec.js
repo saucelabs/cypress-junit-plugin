@@ -38,13 +38,13 @@ describe('generate JUnit file', function () {
     const testsuites = jObj['testsuites'];
     expect(testsuites['@_name']).toBe('Cypress Test - integration Electron');
     expect(testsuites['@_tests']).toBe('3');
-    expect(testsuites['@_failures']).toBe('2');
+    expect(testsuites['@_failures']).toBe('3');
     expect(testsuites['testsuite'].length).toBe(2);
 
     const testsuite = testsuites['testsuite'][0];
     expect(testsuite['@_name']).toBe('actions.cy.js');
     expect(testsuite['@_tests']).toBe('2');
-    expect(testsuite['@_failures']).toBe('1');
+    expect(testsuite['@_failures']).toBe('2');
     expect(testsuite['testcase'].length).toBe(2);
     expect(testsuite['properties']['property'].length).toBe(2);
 

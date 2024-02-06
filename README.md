@@ -46,7 +46,6 @@ const { defineConfig } = require('cypress');
 
 ```javascript
 module.exports = defineConfig({
-  video: true,
   e2e: {
     setupNodeEvents(on, config) {
       require('@saucelabs/cypress-junit-plugin').default(on, config, { filename: 'path/to/my_junit.xml' });

@@ -4,10 +4,10 @@ module.exports = {
   plugins: ['@typescript-eslint', 'cypress'],
   root: true,
   rules: {
-    "@typescript-eslint/no-var-requires": 1,
-    "no-undef": 1,
+    '@typescript-eslint/no-var-requires': 1,
+    'no-undef': 1,
   },
   env: {
     node: true,
-  }
+  },
 };

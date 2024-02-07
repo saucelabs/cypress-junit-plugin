@@ -25,7 +25,6 @@ describe('generate JUnit file', function () {
   }, 30000);
 
   test('JUnit report is generated', function () {
-    execSync('ls');
     expect(fs.existsSync(junitFile)).toBe(true);
 
     const data = fs.readFileSync(junitFile, 'utf8');

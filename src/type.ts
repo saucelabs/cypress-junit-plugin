@@ -54,7 +54,6 @@ export interface JUnitTestCase {
 
 /**
  * Represents a key-value pair used to provide additional metadata for a JUnit test suite or test case.
- *
  * This can include various configurations, environmental information, or any other data relevant to the test execution context.
  */
 export interface Property {
@@ -82,9 +81,6 @@ export interface failure {
  * Defines the structure for an error in a JUnit test case.
  * Unlike a failure, an error typically signifies an unexpected exception or problem that occurred during the test execution,
  * preventing it from completing successfully.
- * @property {string} message -
- * @property {string} type -
- * @property {string} details -
  */
 export interface error {
   // A brief description of the error that occurred during the test.

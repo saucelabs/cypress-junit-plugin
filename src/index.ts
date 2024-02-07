@@ -106,7 +106,7 @@ const msToSec = (durationMs: number): number => {
  * @example
  * Input: "AssertionError: Timed out retrying after 4000ms".
  * Output: "AssertionError".
-*/
+ */
 const parseErrorType = (err: string): string => {
   const items = err.split(' ');
   if (items.length > 1) {

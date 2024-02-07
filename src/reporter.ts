@@ -136,7 +136,7 @@ export default class Reporter {
       // Write the file.
       fs.writeFileSync(filename, content);
     } catch (err) {
-      console.error(`Failed to generate JUnit file(${filename}): `, err);
+      console.error(`Failed to generate JUnit file(${filename}):`, err);
     }
   }
 }

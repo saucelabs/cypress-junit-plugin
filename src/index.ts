@@ -9,7 +9,7 @@ import Reporter, { TestCase, TestSuite } from './reporter';
 
 let reporter: Reporter;
 
-const onBeforeRun = (details: BeforeRunDetails) => {
+function onBeforeRun(details: BeforeRunDetails) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`;
 };

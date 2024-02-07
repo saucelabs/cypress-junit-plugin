@@ -98,12 +98,15 @@ const msToSec = (durationMs: number): number => {
  * Extracts the error type from a given error message string.
  * This function is particularly useful in contexts where Cypress error objects do not explicitly provide an error type field.
  * The function assumes that the error type is specified at the beginning of the error message, followed by a colon.
- * Error message example: "AssertionError: Timed out retrying after 4000ms".
  *
  * @param {string} err - The error message from which to extract the error type.
  * @returns {string} The extracted error type without the colon and details.
  *                   Returns an empty string if the error type cannot be determined.
- */
+ *
+ * @example
+ * Input: "AssertionError: Timed out retrying after 4000ms".
+ * Output: "AssertionError".
+*/
 const parseErrorType = (err: string): string => {
   const items = err.split(' ');
   if (items.length > 1) {

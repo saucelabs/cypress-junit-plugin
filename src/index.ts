@@ -5,6 +5,8 @@ import * as Cypress from 'cypress';
 // By declaring it within this project, we inform Eslint about its existence.
 /* global CypressCommandLine:readonly */
 import RunResult = CypressCommandLine.RunResult;
+import CypressRunResult = CypressCommandLine.CypressRunResult;
+import CypressFailedRunResult = CypressCommandLine.CypressFailedRunResult;
 import BeforeRunDetails = Cypress.BeforeRunDetails;
 import PluginConfigOptions = Cypress.PluginConfigOptions;
 import PluginEvents = Cypress.PluginEvents;
@@ -82,11 +84,16 @@ function onAfterSpec(spec: Spec, results: RunResult) {
   reporter.junitSuite.testsuites?.push(testsuite);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function onAfterRun(results: any) {
-  reporter.junitSuite.tests = results.totalTests;
-  reporter.junitSuite.failures = results.totalFailed;
-  reporter.junitSuite.time = msToSec(results.totalDuration);
+function onAfterRun(
+  results: CypressRunResult | CypressCommandLine.CypressFailedRunResult,
+) {
+  reporter.junitSuite.tests = (results as CypressRunResult).totalTests;
+  reporter.junitSuite.failures =
+    (results as CypressRunResult).totalFailed ||
+    (results as CypressFailedRunResult).failures;
+  reporter.junitSuite.time = msToSec(
+    (results as CypressRunResult).totalDuration,
+  );
 
   reporter.toJUnitFile();
 }

@@ -1,19 +1,21 @@
 # @saucelabs/cypress-junit-plugin
 
-`@saucelabs/cypress-junit-plugin`, a plugin designed to enhance your Cypress testing workflow by generating JUnit test reports.
+`@saucelabs/cypress-junit-plugin` is a third-party plugin designed to enhance your Cypress testing workflow by generating comprehensive JUnit test reports.
 
-## Features
+Please be aware that this plugin is not an official product of Sauce Labs.
 
-- **JUnit Report Generation**: Automatically generates JUnit-formatted test reports from Cypress test runs, making it easy to integrate with a variety of CI/CD and test reporting tools.
-- **Customizable Report Formatting**: Offers options to customize the output of the JUnit reports to meet different requirements or preferences.
+## Unique Features
+
+- **Unified Report Generation**: Unlike other Cypress JUnit reporters/plugins, this plugin generates a single, consolidated JUnit file for the entire test run, rather than creating a separate JUnit file for each spec file. This approach simplifies integration with CI/CD pipelines and test reporting tools.
+- **Rich Content in Reports**: Provides more detailed content in the JUnit reports, offering deeper insights into your test runs compared to other solutions.
 
 ## Prerequisites
 
-Cypress Version: This plugin only supports Cypress version 13 and above. Ensure your project is updated to comply with this requirement.
+**Cypress Version**: This plugin is compatible with Cypress version 13 and above. Make sure your project is updated to meet this version requirement.
 
 ## Installation
 
-Install the plugin via npm by running the following command in your project directory:
+To install the plugin, run the following command in your project directory:
 
 ```bash
 npm install @saucelabs/cypress-junit-plugin --save-dev
@@ -21,30 +23,29 @@ npm install @saucelabs/cypress-junit-plugin --save-dev
 
 ## Configuration
 
-After installation, you need to configure the plugin to work with your Cypress setup.
+After installation, configure the plugin to work with your Cypress setup.
 
-`cypress.config.mjs` example:
+### `cypress.config.mjs` Example:
 
 ```javascript
-import { defineConfig } from 'cypress'
-import reporter from '@saucelabs/cypress-junit-plugin'
+import { defineConfig } from 'cypress';
+import reporter from '@saucelabs/cypress-junit-plugin';
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      reporter.default(on, config,
-        { filename: "path/to/my_junit.xml" }
-      )
-      return config
+      reporter.default(on, config, { filename: "path/to/my_junit.xml" });
+      return config;
     }
   },
-})
+});
 ```
 
-`cypress.config.cjs` example:
-const { defineConfig } = require('cypress');
+### `cypress.config.cjs` Example:
 
 ```javascript
+const { defineConfig } = require('cypress');
+
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
@@ -57,7 +58,7 @@ module.exports = defineConfig({
 
 ## Usage
 
-Run your Cypress tests as you normally would. The plugin will automatically generate a JUnit report in the specified location(default: `junit.xml`) after the test run completes.
+Simply run your Cypress tests as usual. The plugin will automatically generate a JUnit report at the specified location (default: `junit.xml`) after the test run is complete.
 
 ```bash
 cypress run
@@ -65,11 +66,11 @@ cypress run
 
 ## Contributing
 
-We welcome contributions to the `@saucelabs/cypress-junit-plugin`! Please read our contributing guidelines for more information on how to get involved.
+Contributions to the `@saucelabs/cypress-junit-plugin` are welcome! Check out our contributing guidelines for more information on how to participate.
 
 ## Support
 
-If you encounter any issues or have questions about using the plugin, please file an issue on our GitHub repository.
+If you run into any issues or have questions about the plugin, feel free to open an issue on our GitHub repository.
 
 ## License
 

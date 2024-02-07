@@ -29,7 +29,6 @@ function onAfterSpec(spec: Spec, results: RunResult) {
       // The last part of `test.title` is the test name itself.
       // Anything before the last part is the context name.
       // Consequently, the JUnit testcase name is constructed by combining the context name with the test name.
-      // The JUnit testcase classname is assigned the value of the test name.
       test.title.join(' '),
       test.title.length ? test.title[test.title.length - 1] : '',
       msToSec(test.duration),

@@ -17,9 +17,9 @@ let reporter: Reporter;
 function onBeforeRun(details: BeforeRunDetails) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`;
-};
+}
 
-const onAfterSpec = (spec: Spec, results: RunResult) => {
+function onAfterSpec(spec: Spec, results: RunResult) {
   const testsuite = new TestSuite();
   let errCount = 0;
   results.tests.forEach((test) => {
@@ -79,28 +79,28 @@ const onAfterSpec = (spec: Spec, results: RunResult) => {
     });
   }
   reporter.junitSuite.testsuites?.push(testsuite);
-};
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const onAfterRun = (results: any) => {
+function onAfterRun(results: any) {
   reporter.junitSuite.tests = results.totalTests;
   reporter.junitSuite.failures = results.totalFailed;
   reporter.junitSuite.time = msToSec(results.totalDuration);
 
   reporter.toJUnitFile();
-};
+}
 
-const getDuration = (startTime: string, endTime: string): number => {
+function getDuration(startTime: string, endTime: string): number {
   const start = new Date(startTime);
   const end = new Date(endTime);
   const durationMs: number = end.getTime() - start.getTime();
 
   return msToSec(durationMs);
-};
+}
 
-const msToSec = (durationMs: number): number => {
+function msToSec(durationMs: number): number {
   return durationMs / 1000;
-};
+}
 
 /**
  * Extracts the error type from a given error message string.
@@ -115,13 +115,13 @@ const msToSec = (durationMs: number): number => {
  * Input: "AssertionError: Timed out retrying after 4000ms".
  * Output: "AssertionError".
  */
-const parseErrorType = (err: string): string => {
+function parseErrorType(err: string): string {
   const items = err.split(' ');
   if (items.length > 1) {
     return items[0].replaceAll(':', '');
   }
   return '';
-};
+}
 
 export default (
   on: PluginEvents,

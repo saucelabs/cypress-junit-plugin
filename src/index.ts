@@ -1,9 +1,5 @@
 import escape from 'xml-escape';
 import * as Cypress from 'cypress';
-
-// This is necessary because Eslint is unaware of the global namespace provided by Cypress.
-// By declaring it within this project, we inform Eslint about its existence.
-/* global CypressCommandLine:readonly */
 import RunResult = CypressCommandLine.RunResult;
 import CypressRunResult = CypressCommandLine.CypressRunResult;
 import CypressFailedRunResult = CypressCommandLine.CypressFailedRunResult;

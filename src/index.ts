@@ -19,6 +19,12 @@ const onAfterSpec = (spec: Spec, results: CypressCommandLine.RunResult) => {
   let errCount = 0;
   results.tests.forEach((test) => {
     const testcase = new TestCase(
+      // `test.title` includes both the context name (defined in 'describe' or 'context' blocks within Cypress)
+      // and the specific test name.
+      // The last part of `test.title` is the test name itself.
+      // Anything before the last part is the context name.
+      // Consequently, the JUnit testcase name is constructed by combining the context name with the test name.
+      // The JUnit testcase classname is assigned the value of the test name.
       test.title.join(' '),
       test.title.length ? test.title[test.title.length - 1] : '',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

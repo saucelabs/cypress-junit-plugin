@@ -14,12 +14,4 @@ module.exports = {
     // By declaring it within this project, we inform Eslint about its existence.
     CypressCommandLine: 'readonly',
   },
-  overrides: [
-    {
-      files: ['tests/**/*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 0,
-      },
-    },
-  ],
 };

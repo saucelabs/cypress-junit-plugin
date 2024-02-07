@@ -1,5 +1,10 @@
 import escape from 'xml-escape';
 import * as Cypress from 'cypress';
+
+// This is necessary because Eslint is unaware of the global namespace provided by Cypress.
+// By declaring it within this project, we inform Eslint about its existence.
+/* global CypressCommandLine:readonly */
+import RunResult = CypressCommandLine.RunResult;
 import BeforeRunDetails = Cypress.BeforeRunDetails;
 import PluginConfigOptions = Cypress.PluginConfigOptions;
 import PluginEvents = Cypress.PluginEvents;
@@ -14,7 +19,7 @@ function onBeforeRun(details: BeforeRunDetails) {
   reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`;
 };
 
-const onAfterSpec = (spec: Spec, results: CypressCommandLine.RunResult) => {
+const onAfterSpec = (spec: Spec, results: RunResult) => {
   const testsuite = new TestSuite();
   let errCount = 0;
   results.tests.forEach((test) => {

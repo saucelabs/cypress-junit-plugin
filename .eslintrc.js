@@ -4,7 +4,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'cypress'],
   root: true,
   rules: {
-    '@typescript-eslint/no-var-requires': 0,
     'no-undef': 1,
   },
   env: {
@@ -15,4 +14,12 @@ module.exports = {
     // By declaring it within this project, we inform Eslint about its existence.
     CypressCommandLine: 'readonly',
   },
+  overrides: [
+    {
+      files: ['tests/**/*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 0,
+      },
+    },
+  ],
 };

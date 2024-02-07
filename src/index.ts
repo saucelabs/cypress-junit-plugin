@@ -15,6 +15,8 @@ import Reporter, { TestCase, TestSuite } from './reporter';
 let reporter: Reporter;
 
 function onBeforeRun(details: BeforeRunDetails) {
+  // The `projectName` is not officially documented in Cypress documentation.
+  // As used in this context, it represents the basename of the current working directory.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`;
 }
@@ -32,8 +34,7 @@ function onAfterSpec(spec: Spec, results: RunResult) {
       // The JUnit testcase classname is assigned the value of the test name.
       test.title.join(' '),
       test.title.length ? test.title[test.title.length - 1] : '',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      msToSec((test as any).duration),
+      msToSec(test.duration),
       spec.relative || '',
     );
     if (test.state === 'failed') {

@@ -9,15 +9,12 @@ import Reporter, { TestCase, TestSuite } from './reporter';
 
 let reporter: Reporter;
 
-const onBeforeRun = function (details: BeforeRunDetails) {
+const onBeforeRun = (details: BeforeRunDetails) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`;
 };
 
-const onAfterSpec = async function (
-  spec: Spec,
-  results: CypressCommandLine.RunResult,
-) {
+const onAfterSpec = (spec: Spec, results: CypressCommandLine.RunResult) => {
   const testsuite = new TestSuite();
   let errCount = 0;
   results.tests.forEach((test) => {
@@ -74,7 +71,7 @@ const onAfterSpec = async function (
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const onAfterRun = function (results: any) {
+const onAfterRun = (results: any) => {
   reporter.junitSuite.tests = results.totalTests;
   reporter.junitSuite.failures = results.totalFailed;
   reporter.junitSuite.time = msToSec(results.totalDuration);
@@ -115,11 +112,11 @@ const parseErrorType = (err: string): string => {
   return '';
 };
 
-export default function (
+export default (
   on: PluginEvents,
   config: PluginConfigOptions,
   opts?: ConfigOption,
-) {
+) => {
   reporter = new Reporter(
     {
       testsuites: [] as JUnitTestSuite[],
@@ -134,4 +131,4 @@ export default function (
   on('after:run', onAfterRun);
   on('after:spec', onAfterSpec);
   return config;
-}
+};

@@ -6,8 +6,7 @@ Please be aware that this plugin is not an official product of Sauce Labs.
 
 ## Unique Features
 
-- **Unified Report Generation**: Unlike other Cypress JUnit reporters/plugins, this plugin generates a single, consolidated JUnit file for the entire test run, rather than creating a separate JUnit file for each spec file. This approach simplifies integration with CI/CD pipelines and test reporting tools.
-- **Rich Content in Reports**: Provides more detailed content in the JUnit reports, offering deeper insights into your test runs compared to other solutions.
+Unlike Cypress' built-in [junit reporter](https://docs.cypress.io/guides/tooling/reporters), this plugin generates a single, consolidated JUnit file for the entire test run, rather than individual files per spec that then need to be merged.
 
 ## Prerequisites
 

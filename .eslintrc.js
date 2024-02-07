@@ -3,9 +3,6 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'cypress'],
   root: true,
-  rules: {
-    'no-undef': 1,
-  },
   env: {
     node: true,
   },

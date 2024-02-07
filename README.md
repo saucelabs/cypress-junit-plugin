@@ -28,12 +28,12 @@ After installation, configure the plugin to work with your Cypress setup.
 
 ```javascript
 import { defineConfig } from 'cypress';
-import reporter from '@saucelabs/cypress-junit-plugin';
+import junitWriter from '@saucelabs/cypress-junit-plugin';
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      reporter.default(on, config, { filename: "path/to/my_junit.xml" });
+      junitWriter.default(on, config, { filename: "path/to/my_junit.xml" });
       return config;
     }
   },

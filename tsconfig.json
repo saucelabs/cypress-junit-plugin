@@ -11,6 +11,7 @@
     "esModuleInterop": true,
     "outDir": "lib",
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "lib": ["ES2023"]
   }
 }

@@ -65,7 +65,7 @@ export default class Reporter {
   }
 
   addTestSuite(suite: JUnitTestSuite) {
-    this.junitSuite.testsuites?.push(suite);
+    this.junitSuite.testSuites.push(suite);
   }
 
   setFailures(failures: number) {

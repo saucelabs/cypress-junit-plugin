@@ -14,7 +14,7 @@ function onBeforeRun(details: BeforeRunDetails) {
   // The `projectName` is not officially documented in Cypress documentation.
   // As used in this context, it represents the basename of the current working directory.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`;
+  reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName || ''}`;
 }
 
 function onAfterSpec(spec: Spec, results: RunResult) {

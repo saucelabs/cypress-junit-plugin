@@ -67,7 +67,7 @@ export interface Property {
  * Describes the structure of a failure in a JUnit test case.
  * A failure typically indicates an assertion error or an unexpected result from the test logic.
  */
-export interface failure {
+export interface Failure {
   // A summary or description of the failure encountered during test execution.
   message: string;
   // The classification or category of the failure, often indicating the nature of the assertion or error.

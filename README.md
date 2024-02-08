@@ -28,12 +28,12 @@ After installation, configure the plugin to work with your Cypress setup.
 
 ```javascript
 import { defineConfig } from 'cypress';
-import junitWriter from '@saucelabs/cypress-junit-plugin';
+import { setupJUnitPlugin } from '@saucelabs/cypress-junit-plugin';
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      junitWriter.default(on, config, { filename: "path/to/my_junit.xml" });
+      setupJUnitPlugin.default(on, config, { filename: "path/to/my_junit.xml" });
       return config;
     }
   },
@@ -44,11 +44,12 @@ export default defineConfig({
 
 ```javascript
 const { defineConfig } = require('cypress');
+const { setupJUnitPlugin } = require('@saucelabs/cypress-junit-plugin');
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      require('@saucelabs/cypress-junit-plugin').default(on, config, { filename: 'path/to/my_junit.xml' });
+      setupJUnitPlugin(on, config, { filename: 'path/to/my_junit.xml' });
       return config;
     },
   },

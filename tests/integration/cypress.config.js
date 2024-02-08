@@ -1,9 +1,10 @@
 const { defineConfig } = require('cypress');
+const { setupJUnitPlugin } = require('../../src/index')
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      require('../../src/index').default(on, config, { filename: 'junit.xml' });
+      setupJUnitPlugin(on, config, { filename: 'junit.xml' });
       return config;
     },
   },

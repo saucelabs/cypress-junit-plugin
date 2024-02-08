@@ -125,11 +125,11 @@ function parseErrorType(err: string): string {
   return '';
 }
 
-export default (
+export function setupJUnitPlugin (
   on: PluginEvents,
   config: PluginConfigOptions,
   opts?: ConfigOption,
-) => {
+) {
   reporter = new Reporter(
     {
       testsuites: [] as JUnitTestSuite[],

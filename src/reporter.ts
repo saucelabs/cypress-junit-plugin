@@ -31,6 +31,7 @@ export class TestSuite implements JUnitTestSuite {
     this.timestamp = '';
     this.file = '';
     this.testCases = [];
+    this.testsuites = [];
   }
 
   add(testcase: JUnitTestCase) {

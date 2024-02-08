@@ -79,7 +79,7 @@ function onAfterSpec(spec: Spec, results: RunResult) {
 }
 
 function onAfterRun(
-  results: CypressRunResult | CypressCommandLine.CypressFailedRunResult,
+  results: CypressRunResult | CypressFailedRunResult,
 ) {
   reporter.junitSuite.tests = (results as CypressRunResult).totalTests;
   reporter.junitSuite.failures =

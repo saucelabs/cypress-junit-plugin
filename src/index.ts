@@ -10,15 +10,6 @@ import Reporter, { TestCase, TestSuite } from './reporter';
 
 let reporter: Reporter;
 
-function onBeforeRun(details: BeforeRunDetails) {
-  // The `projectName` is not officially documented in Cypress documentation.
-  // As used in this context, it represents the basename of the current working directory.
-  reporter.setSuiteName(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName || ''}`,
-  );
-}
-
 function onAfterSpec(spec: Spec, results: RunResult) {
   const testsuite = new TestSuite();
   let errCount = 0;
@@ -141,7 +132,12 @@ export function setupJUnitPlugin(
     },
   );
 
-  on('before:run', onBeforeRun);
+  on('before:run', function (details: BeforeRunDetails) {
+    reporter.setSuiteName(
+      `Cypress Test - ${config.projectName} ${details.browser?.displayName || ''}`,
+    );
+  });
+
   on('after:run', onAfterRun);
   on('after:spec', onAfterSpec);
   return config;

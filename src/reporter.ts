@@ -3,8 +3,8 @@ import * as path from 'path';
 import type {
   JUnitTestSuite,
   JUnitTestCase,
-  failure,
-  error,
+  Failure,
+  Error,
   Property,
   ConfigOption,
 } from './type';
@@ -43,8 +43,8 @@ export class TestCase implements JUnitTestCase {
   classname: string;
   time: number;
   file: string;
-  failure?: failure | undefined;
-  error?: error | undefined;
+  failure?: Failure | undefined;
+  error?: Error | undefined;
 
   constructor(name: string, classname: string, time: number, file: string) {
     this.name = name;

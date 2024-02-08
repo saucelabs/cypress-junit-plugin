@@ -45,9 +45,9 @@ export interface JUnitTestCase {
   // Source code file of this test suite.
   file: string;
   // Details of the test failure, if the test did not pass successfully.
-  failure?: failure;
+  failure?: Failure;
   // Details of any error encountered during the test case execution.
-  error?: error;
+  error?: Error;
   // Array of additional metadata properties related to the test case.
   properties?: Property[];
 }
@@ -82,7 +82,7 @@ export interface Failure {
  * Unlike a failure, an error typically signifies an unexpected exception or problem that occurred during the test execution,
  * preventing it from completing successfully.
  */
-export interface error {
+export interface Error {
   // A brief description of the error that occurred during the test.
   message: string;
   // The type or category of the error, often indicating the exception class or error type.

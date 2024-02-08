@@ -97,7 +97,7 @@ export default class Reporter {
         testsuite: [] as any[],
       },
     };
-    this.junitSuite.testsuites?.forEach((suite) => {
+    this.junitSuite.testSuites.forEach((suite) => {
       const testsuite = {
         '@name': suite.name,
         '@tests': suite.tests,

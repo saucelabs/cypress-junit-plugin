@@ -1,4 +1,3 @@
-import * as Cypress from 'cypress';
 import RunResult = CypressCommandLine.RunResult;
 import CypressRunResult = CypressCommandLine.CypressRunResult;
 import CypressFailedRunResult = CypressCommandLine.CypressFailedRunResult;

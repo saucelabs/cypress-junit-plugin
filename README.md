@@ -33,7 +33,7 @@ import { setupJUnitPlugin } from '@saucelabs/cypress-junit-plugin';
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      setupJUnitPlugin.default(on, config, { filename: "path/to/my_junit.xml" });
+      setupJUnitPlugin(on, config, { filename: "path/to/my_junit.xml" });
       return config;
     }
   },

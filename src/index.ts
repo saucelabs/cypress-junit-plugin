@@ -1,4 +1,3 @@
-import escape from 'xml-escape';
 import * as Cypress from 'cypress';
 import RunResult = CypressCommandLine.RunResult;
 import CypressRunResult = CypressCommandLine.CypressRunResult;
@@ -36,14 +35,14 @@ function onAfterSpec(spec: Spec, results: RunResult) {
     );
     if (test.state === 'failed') {
       testcase.failure = {
-        message: escape(test.displayError || ''),
+        message: test.displayError || '',
         type: parseErrorType(test.displayError || ''),
         details: test.displayError || undefined,
       };
     }
     if (results.error) {
       testcase.error = {
-        message: escape(results.error),
+        message: results.error,
         type: 'error',
         details: results.error,
       };

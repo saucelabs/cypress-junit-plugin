@@ -18,7 +18,7 @@ export class TestSuite implements JUnitTestSuite {
   time: number;
   timestamp: string;
   file: string;
-  testsuites: JUnitTestSuite[] | undefined;
+  testSuites: JUnitTestSuite[];
   testCases: JUnitTestCase[];
   properties?: Property[] | undefined;
 

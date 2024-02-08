@@ -78,16 +78,20 @@ function onAfterSpec(spec: Spec, results: RunResult) {
   reporter.junitSuite.testsuites?.push(testsuite);
 }
 
-function onAfterRun(
-  results: CypressRunResult | CypressFailedRunResult,
-) {
-  reporter.junitSuite.tests = (results as CypressRunResult).totalTests;
-  reporter.junitSuite.failures =
-    (results as CypressRunResult).totalFailed ||
-    (results as CypressFailedRunResult).failures;
-  reporter.junitSuite.time = msToSec(
-    (results as CypressRunResult).totalDuration,
-  );
+function isFailedRunResult(
+  maybe: CypressRunResult | CypressFailedRunResult,
+): maybe is CypressFailedRunResult {
+  return (maybe as CypressFailedRunResult).status === 'failed';
+}
+
+function onAfterRun(results: CypressRunResult | CypressFailedRunResult) {
+  if (isFailedRunResult(results)) {
+    reporter.junitSuite.failures = results.failures;
+  } else {
+    reporter.junitSuite.tests = results.totalTests;
+    reporter.junitSuite.failures = results.totalFailed;
+    reporter.junitSuite.time = msToSec(results.totalDuration);
+  }
 
   reporter.toJUnitFile();
 }
@@ -125,7 +129,7 @@ function parseErrorType(err: string): string {
   return '';
 }
 
-export function setupJUnitPlugin (
+export function setupJUnitPlugin(
   on: PluginEvents,
   config: PluginConfigOptions,
   opts?: ConfigOption,
@@ -144,4 +148,4 @@ export function setupJUnitPlugin (
   on('after:run', onAfterRun);
   on('after:spec', onAfterSpec);
   return config;
-};
+}

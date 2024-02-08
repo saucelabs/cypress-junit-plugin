@@ -11,9 +11,4 @@ module.exports = {
   env: {
     node: true,
   },
-  globals: {
-    // This is necessary because Eslint is unaware of the global namespace provided by Cypress.
-    // By declaring it within this project, we inform Eslint about its existence.
-    CypressCommandLine: 'readonly',
-  },
 };

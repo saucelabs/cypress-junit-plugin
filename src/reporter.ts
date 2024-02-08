@@ -18,7 +18,7 @@ export class TestSuite implements JUnitTestSuite {
   time: number;
   timestamp: string;
   file: string;
-  testsuites: JUnitTestSuite[] | undefined;
+  testSuites: JUnitTestSuite[];
   testCases: JUnitTestCase[];
   properties?: Property[] | undefined;
 
@@ -31,6 +31,7 @@ export class TestSuite implements JUnitTestSuite {
     this.timestamp = '';
     this.file = '';
     this.testCases = [];
+    this.testSuites = [];
   }
 
   add(testcase: JUnitTestCase) {
@@ -58,9 +59,30 @@ export default class Reporter {
   public junitSuite: JUnitTestSuite;
   private opts: ConfigOption;
 
-  constructor(junitTestSuite: JUnitTestSuite, opts: ConfigOption) {
-    this.junitSuite = junitTestSuite;
+  constructor(opts: ConfigOption) {
+    this.junitSuite = new TestSuite();
     this.opts = opts;
+  }
+
+  addTestSuite(suite: JUnitTestSuite) {
+    this.junitSuite.testSuites.push(suite);
+  }
+
+  setFailures(failures: number) {
+    this.junitSuite.failures = failures;
+  }
+
+  setTests(tests: number) {
+    this.junitSuite.tests = tests;
+  }
+
+  setTime(time: number) {
+    this.junitSuite.time = time;
+  }
+
+  // Set the name of the root test suite.
+  setSuiteName(name: string) {
+    this.junitSuite.name = name;
   }
 
   toJUnitFile() {
@@ -75,7 +97,7 @@ export default class Reporter {
         testsuite: [] as any[],
       },
     };
-    this.junitSuite.testsuites?.forEach((suite) => {
+    this.junitSuite.testSuites?.forEach((suite) => {
       const testsuite = {
         '@name': suite.name,
         '@tests': suite.tests,

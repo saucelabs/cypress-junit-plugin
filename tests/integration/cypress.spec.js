@@ -33,9 +33,9 @@ describe('generate JUnit file', function () {
       attributeNamePrefix: '@_',
     });
     let jObj = parser.parse(data);
-    expect(jObj['testsuites']).not.toBeNull();
+    expect(jObj['testSuites']).not.toBeNull();
 
-    const testsuites = jObj['testsuites'];
+    const testsuites = jObj['testSuites'];
     expect(testsuites['@_name']).toBe('Cypress Test - integration Electron');
     expect(testsuites['@_tests']).toBe('3');
     expect(testsuites['@_failures']).toBe('3');

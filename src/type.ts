@@ -25,7 +25,7 @@ export interface JUnitTestSuite {
   // Source code file of this test suite.
   file: string;
   // Array of JUnitTestSuite objects, each representing an individual test suite.
-  testsuites?: JUnitTestSuite[];
+  testSuites: JUnitTestSuite[];
   // Array of JUnitTestCase objects, each representing an individual test case.
   testCases: JUnitTestCase[];
   // Array of Property objects for specifying additional metadata related to the test suite.

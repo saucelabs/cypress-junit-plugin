@@ -15,7 +15,7 @@ function onBeforeRun(details: BeforeRunDetails) {
   // As used in this context, it represents the basename of the current working directory.
   reporter.setSuiteName(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    `Cypress Test - ${(details as any).projectName} ${details.browser?.displayName || ''}`,
+    `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName}`,
   );
 }
 

@@ -58,9 +58,30 @@ export default class Reporter {
   public junitSuite: JUnitTestSuite;
   private opts: ConfigOption;
 
-  constructor(junitTestSuite: JUnitTestSuite, opts: ConfigOption) {
-    this.junitSuite = junitTestSuite;
+  constructor(opts: ConfigOption) {
+    this.junitSuite = new TestSuite();
     this.opts = opts;
+  }
+
+  addTestSuite(suite: JUnitTestSuite) {
+    this.junitSuite.testsuites?.push(suite);
+  }
+
+  setFailures(failures: number) {
+    this.junitSuite.failures = failures;
+  }
+
+  setTests(tests: number) {
+    this.junitSuite.tests = tests;
+  }
+
+  setTime(time: number) {
+    this.junitSuite.time = time;
+  }
+
+  // Set the name of the root test suite.
+  setSuiteName(name: string) {
+    this.junitSuite.name = name;
   }
 
   toJUnitFile() {

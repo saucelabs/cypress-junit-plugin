@@ -5,7 +5,7 @@ import BeforeRunDetails = Cypress.BeforeRunDetails;
 import PluginConfigOptions = Cypress.PluginConfigOptions;
 import PluginEvents = Cypress.PluginEvents;
 import Spec = Cypress.Spec;
-import { ConfigOption, JUnitTestSuite } from './type';
+import { ConfigOption } from './type';
 import Reporter, { TestCase, TestSuite } from './reporter';
 
 let reporter: Reporter;
@@ -13,8 +13,10 @@ let reporter: Reporter;
 function onBeforeRun(details: BeforeRunDetails) {
   // The `projectName` is not officially documented in Cypress documentation.
   // As used in this context, it represents the basename of the current working directory.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reporter.junitSuite.name = `Cypress Test - ${(details.config as any)?.projectName} ${details.browser?.displayName || ''}`;
+  reporter.setSuiteName(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    `Cypress Test - ${(details as any).projectName} ${details.browser?.displayName || ''}`,
+  );
 }
 
 function onAfterSpec(spec: Spec, results: RunResult) {
@@ -74,7 +76,7 @@ function onAfterSpec(spec: Spec, results: RunResult) {
       value: results.video,
     });
   }
-  reporter.junitSuite.testsuites?.push(testsuite);
+  reporter.addTestSuite(testsuite);
 }
 
 function isFailedRunResult(
@@ -85,11 +87,11 @@ function isFailedRunResult(
 
 function onAfterRun(results: CypressRunResult | CypressFailedRunResult) {
   if (isFailedRunResult(results)) {
-    reporter.junitSuite.failures = results.failures;
+    reporter.setFailures(results.failures);
   } else {
-    reporter.junitSuite.tests = results.totalTests;
-    reporter.junitSuite.failures = results.totalFailed;
-    reporter.junitSuite.time = msToSec(results.totalDuration);
+    reporter.setTests(results.totalTests);
+    reporter.setFailures(results.totalFailed);
+    reporter.setTime(msToSec(results.totalDuration));
   }
 
   reporter.toJUnitFile();
@@ -134,13 +136,9 @@ export function setupJUnitPlugin(
   opts?: ConfigOption,
 ) {
   reporter = new Reporter(
-    {
-      testsuites: [] as JUnitTestSuite[],
-    } as JUnitTestSuite,
-    opts ||
-      ({
-        filename: 'junit.xml',
-      } as ConfigOption),
+    opts || {
+      filename: 'junit.xml',
+    },
   );
 
   on('before:run', onBeforeRun);

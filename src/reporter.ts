@@ -79,7 +79,7 @@ export default class Reporter {
     this.rootSuite.tests = tests;
   }
 
-  // Sets the total duration for the entire run.
+  // Sets the total duration in seconds for the entire run.
   setTime(time: number) {
     this.rootSuite.time = time;
   }

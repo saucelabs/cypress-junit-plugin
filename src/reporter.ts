@@ -31,7 +31,7 @@ export class TestSuite implements JUnitTestSuite {
     this.timestamp = '';
     this.file = '';
     this.testCases = [];
-    this.testsuites = [];
+    this.testSuites = [];
   }
 
   add(testcase: JUnitTestCase) {
@@ -64,23 +64,27 @@ export default class Reporter {
     this.opts = opts;
   }
 
+  // Adds a JUnit test suite to the collection of test suites.
   addTestSuite(suite: JUnitTestSuite) {
     this.junitSuite.testSuites.push(suite);
   }
 
+  // Sets the total number of failures for the entire run.
   setFailures(failures: number) {
     this.junitSuite.failures = failures;
   }
 
+  // Sets the total number of tests for the entire run.
   setTests(tests: number) {
     this.junitSuite.tests = tests;
   }
 
+  // Sets the total duration for the entire run.
   setTime(time: number) {
     this.junitSuite.time = time;
   }
 
-  // Set the name of the root test suite.
+  // Sets the name of the root test suite.
   setSuiteName(name: string) {
     this.junitSuite.name = name;
   }

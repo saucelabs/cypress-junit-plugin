@@ -20,7 +20,7 @@ export class TestSuite implements JUnitTestSuite {
   file: string;
   testSuites: JUnitTestSuite[];
   testCases: JUnitTestCase[];
-  properties?: Property[] | undefined;
+  properties?: Property[];
 
   constructor() {
     this.name = '';

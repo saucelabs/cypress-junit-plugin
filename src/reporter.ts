@@ -56,52 +56,52 @@ export class TestCase implements JUnitTestCase {
 }
 
 export default class Reporter {
-  public junitSuite: JUnitTestSuite;
+  public rootSuite: JUnitTestSuite;
   private opts: ConfigOption;
 
   constructor(opts: ConfigOption) {
-    this.junitSuite = new TestSuite();
+    this.rootSuite = new TestSuite();
     this.opts = opts;
   }
 
   // Adds a JUnit test suite to the collection of test suites.
   addTestSuite(suite: JUnitTestSuite) {
-    this.junitSuite.testSuites.push(suite);
+    this.rootSuite.testSuites.push(suite);
   }
 
   // Sets the total number of failures for the entire run.
   setFailures(failures: number) {
-    this.junitSuite.failures = failures;
+    this.rootSuite.failures = failures;
   }
 
   // Sets the total number of tests for the entire run.
   setTests(tests: number) {
-    this.junitSuite.tests = tests;
+    this.rootSuite.tests = tests;
   }
 
   // Sets the total duration for the entire run.
   setTime(time: number) {
-    this.junitSuite.time = time;
+    this.rootSuite.time = time;
   }
 
   // Sets the name of the root test suite.
   setSuiteName(name: string) {
-    this.junitSuite.name = name;
+    this.rootSuite.name = name;
   }
 
   toJUnitFile() {
     const obj = {
       testsuites: {
-        '@name': this.junitSuite.name,
-        '@tests': this.junitSuite.tests,
-        '@failures': this.junitSuite.failures,
-        '@time': this.junitSuite.time,
-        '@errors': this.junitSuite.errors,
+        '@name': this.rootSuite.name,
+        '@tests': this.rootSuite.tests,
+        '@failures': this.rootSuite.failures,
+        '@time': this.rootSuite.time,
+        '@errors': this.rootSuite.errors,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         testsuite: [] as any[],
       },
     };
-    this.junitSuite.testSuites.forEach((suite) => {
+    this.rootSuite.testSuites.forEach((suite) => {
       const testsuite = {
         '@name': suite.name,
         '@tests': suite.tests,

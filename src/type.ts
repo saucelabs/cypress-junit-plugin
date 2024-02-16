@@ -1,7 +1,7 @@
 /**
  * Defines the structure for configuration options.
  */
-export interface ConfigOption {
+export interface ConfigOptions {
   // Name/path of the JUnit file.
   filename: string;
 }

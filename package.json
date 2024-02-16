@@ -1,5 +1,6 @@
 {
   "name": "@saucelabs/cypress-junit-plugin",
+  "version": "0.1.0",
   "description": "Sauce Cypress JUnit Plugin",
   "main": "lib/index.js",
   "scripts": {
@@ -54,6 +55,5 @@
     "release-it": "^17.0.3",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
-  },
-  "version": "0.1.0"
+  }
 }

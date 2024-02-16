@@ -64,6 +64,22 @@ Simply run your Cypress tests as usual. The plugin will automatically generate a
 cypress run
 ```
 
+## API Usage
+
+If you are using the Cypress module API, you can pass the Cypress results to the plugin directly:
+
+```javascript
+const cypress = require('cypress')
+const {createJUnitReport} = require('@saucelabs/cypress-junit-plugin')
+
+cypress.run({
+  reporter: 'spec',
+  browser: 'chrome',
+}).then(r => {
+  createJUnitReport(r, { filename: 'path/to/my_junit.xml' });
+})
+```
+
 ## Contributing
 
 Contributions to the `@saucelabs/cypress-junit-plugin` are welcome! Check out our contributing guidelines for more information on how to participate.

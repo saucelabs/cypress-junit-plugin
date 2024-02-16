@@ -121,6 +121,10 @@ function parseErrorType(err: string): string {
   return '';
 }
 
+/**
+ * Set up the JUnit plugin for Cypress. A JUnit report will be generated at the
+ * end of the Cypress run.
+ */
 export function setupJUnitPlugin(
   on: PluginEvents,
   config: PluginConfigOptions,
@@ -141,4 +145,33 @@ export function setupJUnitPlugin(
   on('after:run', onAfterRun);
   on('after:spec', onAfterSpec);
   return config;
+}
+
+/**
+ * Create a JUnit report from the results of a Cypress run. You can use this
+ * function when running Cypress via its module API.
+ * If you are using the Cypress CLI, call `setupJUnitPlugin()` from your config
+ * file instead.
+ */
+export function createJUnitReport(
+  results: CypressRunResult | CypressFailedRunResult,
+  opts?: ConfigOptions,
+) {
+  reporter = new Reporter(
+    opts || {
+      filename: 'junit.xml',
+    },
+  );
+
+  if (isFailedRunResult(results)) {
+    onAfterRun(results);
+    return;
+  }
+
+  reporter.setSuiteName(`Cypress Test - ${results.browserName}`);
+  results.runs.forEach((run) => {
+    onAfterSpec(run.spec, run);
+  });
+
+  onAfterRun(results);
 }

@@ -6,7 +6,7 @@ import PluginConfigOptions = Cypress.PluginConfigOptions;
 import PluginEvents = Cypress.PluginEvents;
 import Spec = Cypress.Spec;
 import { ConfigOption } from './type';
-import Reporter, { TestCase, TestSuite } from './reporter';
+import { Reporter, TestCase, TestSuite } from './reporter';
 
 let reporter: Reporter;
 

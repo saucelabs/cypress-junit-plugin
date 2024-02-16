@@ -55,7 +55,7 @@ export class TestCase implements JUnitTestCase {
   }
 }
 
-export default class Reporter {
+export class Reporter {
   public rootSuite: JUnitTestSuite;
   private opts: ConfigOption;
 

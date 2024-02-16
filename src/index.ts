@@ -5,7 +5,7 @@ import BeforeRunDetails = Cypress.BeforeRunDetails;
 import PluginConfigOptions = Cypress.PluginConfigOptions;
 import PluginEvents = Cypress.PluginEvents;
 import Spec = Cypress.Spec;
-import { ConfigOption } from './type';
+import { ConfigOptions } from './type';
 import { Reporter, TestCase, TestSuite } from './reporter';
 
 let reporter: Reporter;
@@ -124,7 +124,7 @@ function parseErrorType(err: string): string {
 export function setupJUnitPlugin(
   on: PluginEvents,
   config: PluginConfigOptions,
-  opts?: ConfigOption,
+  opts?: ConfigOptions,
 ) {
   reporter = new Reporter(
     opts || {

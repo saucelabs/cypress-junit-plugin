@@ -6,7 +6,7 @@ import type {
   Failure,
   Error,
   Property,
-  ConfigOption,
+  ConfigOptions,
 } from './type';
 import { create } from 'xmlbuilder2';
 
@@ -57,9 +57,9 @@ export class TestCase implements JUnitTestCase {
 
 export class Reporter {
   public rootSuite: JUnitTestSuite;
-  private opts: ConfigOption;
+  private opts: ConfigOptions;
 
-  constructor(opts: ConfigOption) {
+  constructor(opts: ConfigOptions) {
     this.rootSuite = new TestSuite();
     this.opts = opts;
   }
